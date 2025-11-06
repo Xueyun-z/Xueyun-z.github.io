@@ -1,45 +1,175 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Xueyun Zhang | Creative Coding Portfolio</title>
-    <style>
-      body {
-        background-color: #57395f;
-        font-family: 'Helvetica Neue', sans-serif;
-        color: #d4d6d7;
-        text-align: center;
-        margin-top: 80px;
-      }
-      h1 {
-        font-size: 2.5em;
-        margin-bottom: 0.5em;
-      }
-      p {
-        max-width: 600px;
-        margin: 0 auto 1.5em;
-        line-height: 1.5em;
-      }
-      a {
-        display: inline-block;
-        margin: 0.5em;
-        text-decoration: none;
-        color: #d9b18ae3;
-        font-weight: bold;
-      }
-      a:hover {
-        text-decoration: underline;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>✨ Xueyun Zhang ✨</h1>
-    <p>Actor. Filmmaker. Coder.  
-       Exploring harmony between humans, machines, and emotion.</p>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>We Confess | Stable Glow</title>
+<style>
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: #0b0611;
+    color: #4c3e51;              /* base text invisible */
+    font-family: 'Helvetica Neue', sans-serif;
+    overflow: hidden;
+  }
 
-    <h3>Projects</h3>
-    <a href="perfect-chorus/index.html">Perfect Chorus</a>
-    <a href="cosmic-time/index.html">Cosmic Time</a>
-    <a href="gear-world/index.html">Gear World</a>
-  </body>
+  .manifesto {
+    position: absolute;
+    width: 90%;
+    height: 90%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    column-count: 4;
+    column-gap: 2em;
+    line-height: 1.6em;
+    letter-spacing: 0.5px;
+    font-size: 1.05em;
+    text-align: left;
+  }
+
+  .word {
+    position: relative;
+    display: inline-block;
+    line-height: 1.4em;
+    vertical-align: top;
+  }
+
+  /* duplicate word overlay that glows independently */
+  .word::after {
+    content: attr(data-word);
+    position: absolute;
+    left: 0; top: 0;
+    color: #f5f0ef;
+    opacity: 0.2;
+    text-shadow: 0 0 8px rgba(254, 250, 250, 0);
+    transition: opacity 1.8s ease;
+    pointer-events: none;
+  }
+
+  .word.glow::after { opacity: 1; }
+
+  .center-circle {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 160px; height: 160px;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 50%;
+    z-index: 10;
+  }
+
+  .center-circle a {
+    position: absolute;
+    color: #eca965;
+    text-decoration: none;
+    font-weight: bold;
+    transform-origin: center;
+    transition: color 0.3s;
+  }
+  .center-circle a:hover { color: #fff1e1; }
+  .dark-overlay {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(
+      circle 150px at var(--x, 50%) var(--y, 50%),
+      rgba(43, 27, 63, 0) 0%,
+      rgba(11,6,17,0.9) 80%
+    );
+    pointer-events: none; /* lets mouse go through */
+    mix-blend-mode: multiply; /* softens the reveal */
+    transition: background 0.1s;
+    z-index: 20;
+  }
+</style>
+</head>
+<body>
+
+<div class="manifesto" id="manifesto"></div>
+
+<div class="center-circle" id="circle">
+  <a href="Perfect Chorus/index.html">Perfect&nbsp;Chorus</a>
+  <a href="Piston Drums/index.html">Piston&nbsp;Drum</a>
+  <a href="Interactive Mandala/index.html">Interactive&nbsp;Mandala</a>
+  </div>
+  <div class="dark-overlay" id="overlay"></div>
+
+
+<script>
+/* ----------  MANIFESTO TEXT  ---------- */
+const manifestoText = `
+Art is our confession. To ourselves. To the world.
+We believe in freedom. We believe in constraint.
+We believe in beauty that hides in shadow.
+We believe in what hums beneath the surface.
+We believe in the emotions unspoken. The feelings unnamed.
+The words left unsaid.
+Our fear is not our enemy. There is no courage without fear.
+We love our imperfection. Our awkwardness. Our sadness.
+They make us human. They make us whole.
+We make art to dig out the hidden things.
+To recognize them. To feel them. To honor them.
+Do not turn away. Do not soften the edges.
+Do not ignore what you cannot see.
+Stay with what terrifies us.
+Through art we meet ourselves.
+Through art we meet our opposite selves.
+Through art we meet what we might yet become.
+— Xueyun Zhang
+`;
+
+/* repeat text many times for coverage */
+let fullText = "";
+for (let i = 0; i < 8; i++) fullText += manifestoText + " ";
+
+const words = fullText.split(/\s+/);
+const container = document.getElementById('manifesto');
+
+words.forEach(word => {
+  const span = document.createElement('span');
+  span.className = 'word';
+  span.textContent = word + ' ';
+  span.setAttribute('data-word', word);
+  container.appendChild(span);
+});
+
+/* ----------  RANDOM GLOW ANIMATION ---------- */
+const wordsEls = document.querySelectorAll('.word');
+function randomGlow() {
+  const w = wordsEls[Math.floor(Math.random() * wordsEls.length)];
+  w.classList.add('glow');
+  setTimeout(() => w.classList.remove('glow'), 2500);
+}
+setInterval(randomGlow, 200);
+
+/* ----------  ORBITING LINKS ---------- */
+const circle = document.getElementById('circle');
+const links = circle.querySelectorAll('a');
+const radius = 80;
+let angle = 0;
+
+function orbit() {
+  angle += 0.01;
+  links.forEach((link, i) => {
+    const a = angle + (i * (Math.PI * 2 / links.length));
+    const x = Math.cos(a) * radius;
+    const y = Math.sin(a) * radius;
+    link.style.left = 50 + x / 1.6 + '%';
+    link.style.top = 50 + y / 1.6 + '%';
+  });
+  requestAnimationFrame(orbit);
+}
+orbit();
+/* ----- FLASHLIGHT EFFECT ----- */
+const overlay = document.getElementById('overlay');
+
+document.addEventListener('mousemove', (e) => {
+  // update CSS variables to cursor position
+  overlay.style.setProperty('--x', `${e.clientX}px`);
+  overlay.style.setProperty('--y', `${e.clientY}px`);
+});
+</script>
+</body>
 </html>
+
+ 
