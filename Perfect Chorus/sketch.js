@@ -271,5 +271,8 @@ function clearChorus() {
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
   floorY = height - 100;
-  cloud.x = width / 2;
+
+  if (cloud) { // only update if cloud exists
+    cloud.x = width / 2;
+  }
 }
