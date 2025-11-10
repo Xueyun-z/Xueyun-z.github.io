@@ -31,13 +31,13 @@ let startButton;
 let imgs = {};
 
 function preload() {
-  imgs.cat  = loadImage('assets/images/cat.png');
-  imgs.chick  = loadImage('assets/images/chick.png');
-  imgs.clapping = loadImage('assets/images/clapping.png');
-  imgs.cow  = loadImage('assets/images/cow.png');
-  imgs.gas = loadImage('assets/images/gas.png');
-  imgs.ghost = loadImage('assets/images/ghost.png');
-  imgs.monkey = loadImage('assets/images/monkey.png');
+  imgs.cat  = loadImage('Assets/Images/cat.png');
+  imgs.chick  = loadImage('Assets/Images/chick.png');
+  imgs.clapping = loadImage('Assets/Images/clapping.png');
+  imgs.cow  = loadImage('Assets/Images/cow.png');
+  imgs.gas = loadImage('Assets/Images/gas.png');
+  imgs.ghost = loadImage('Assets/Images/ghost.png');
+  imgs.monkey = loadImage('Assets/Images/monkey.png');
 }
 
 function setup() {
