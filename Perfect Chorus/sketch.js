@@ -51,7 +51,7 @@ function setup() {
   startButton.mousePressed(() => {
     getAudioContext().resume().then(() => {
       console.log('AudioContext is now running');
-      startButton.remove(); // remove the button once it works
+      startButton.remove(); 
     });
   });
 
@@ -128,7 +128,7 @@ function playVoice(type) {
   if (v.wave === "noise") {
     src = new p5.Noise('white');
   } else {
-    src = new p5.Oscillator('sine'); // all voices = sine for now
+    src = new p5.Oscillator('sine'); 
     const jitter = random(0.97, 1.03);
     src.freq(v.baseFreq * jitter);
   }
@@ -137,9 +137,9 @@ function playVoice(type) {
   env.setADSR(...v.env);
   env.setRange(v.vol, 0);
 
-  // 🔗 new: always connect directly to master output
+ 
   src.amp(env);
-  src.connect();       // ensures it's routed to the destination
+  src.connect();       
   src.start();
   env.play();
   src.stop(0.6);
@@ -164,30 +164,30 @@ class bouncer {
   }
 
   update() {
-  // movement
+ 
   this.x += this.vx;
   this.y += this.vy;
 
-  // floor bounce
+  
   if (this.y + this.r > floorY) {
     this.y = floorY - this.r;
-    this.vy = -abs(this.vy);  // bounce upward
+    this.vy = -abs(this.vy);  
     this.makeSound();
   }
 
-  // ceiling bounce
+ 
   if (this.y - this.r < ceilingY) {
     this.y = ceilingY + this.r;
-    this.vy = abs(this.vy);   // bounce downward
+    this.vy = abs(this.vy);   
     this.makeSound();
   }
 
-  // horizontal walls
+  
   if (this.x - this.r < 0 || this.x + this.r > width) {
     this.vx *= -1;
   }
 
-  // keep within safe range in case of numeric drift
+  
   this.y = constrain(this.y, ceilingY + this.r, floorY - this.r);
 }
 
@@ -244,9 +244,9 @@ class bouncer {
 function mousePressed() {
   const d = dist(mouseX, mouseY, cloud.x, cloud.y);
   if (d < cloud.r * 1.2) {
-    ensureAudio(); // wake audio context
+    ensureAudio(); 
     
-    // only spawn if all images are loaded
+    
     if (Object.keys(imgs).length === Object.keys(TYPE_DATA).length) {
       const types = Object.keys(TYPE_DATA);
       const chosen = random(types);
@@ -272,7 +272,7 @@ function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
   floorY = height - 100;
 
-  if (cloud) { // only update if cloud exists
+  if (cloud) { 
     cloud.x = width / 2;
   }
 }

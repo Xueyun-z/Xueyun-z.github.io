@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>We Confess | Stable Glow</title>
+<title>We Confess | Xueyun Zhang</title>
 <style>
   html, body {
     margin: 0;
     height: 100%;
     background: #0b0611;
-    color: #4c3e51;              /* base text invisible */
+    color: #4c3e51;             
     font-family: 'Helvetica Neue', sans-serif;
     overflow: hidden;
   }
@@ -35,7 +35,7 @@
     vertical-align: top;
   }
 
-  /* duplicate word overlay that glows independently */
+
   .word::after {
     content: attr(data-word);
     position: absolute;
@@ -76,8 +76,8 @@
       rgba(43, 27, 63, 0) 0%,
       rgba(11,6,17,0.9) 80%
     );
-    pointer-events: none; /* lets mouse go through */
-    mix-blend-mode: multiply; /* softens the reveal */
+    pointer-events: none; 
+    mix-blend-mode: multiply; 
     transition: background 0.1s;
     z-index: 20;
   }
@@ -96,7 +96,7 @@
 
 
 <script>
-/* ----------  MANIFESTO TEXT  ---------- */
+
 const manifestoText = `
 Art is our confession. To ourselves. To the world.
 We believe in freedom. We believe in constraint.
@@ -122,7 +122,7 @@ Through art we meet our opposite selves.
 Through art we meet what we might yet become.
 `;
 
-/* repeat text many times for coverage */
+
 let fullText = "";
 for (let i = 0; i < 8; i++) fullText += manifestoText + " ";
 
@@ -137,7 +137,7 @@ words.forEach(word => {
   container.appendChild(span);
 });
 
-/* ----------  RANDOM GLOW ANIMATION ---------- */
+
 const wordsEls = document.querySelectorAll('.word');
 function randomGlow() {
   const w = wordsEls[Math.floor(Math.random() * wordsEls.length)];
@@ -146,7 +146,7 @@ function randomGlow() {
 }
 setInterval(randomGlow, 200);
 
-/* ----------  ORBITING LINKS ---------- */
+
 const circle = document.getElementById('circle');
 const links = circle.querySelectorAll('a');
 const radius = 80;
@@ -164,11 +164,11 @@ function orbit() {
   requestAnimationFrame(orbit);
 }
 orbit();
-/* ----- FLASHLIGHT EFFECT ----- */
+
 const overlay = document.getElementById('overlay');
 
 document.addEventListener('mousemove', (e) => {
-  // update CSS variables to cursor position
+ 
   overlay.style.setProperty('--x', `${e.clientX}px`);
   overlay.style.setProperty('--y', `${e.clientY}px`);
 });

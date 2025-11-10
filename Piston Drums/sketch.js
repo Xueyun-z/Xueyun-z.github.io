@@ -1,4 +1,4 @@
-// // 🥁 Piston Drum v2 - Modular + Perfect Time Sync
+
 
 // let tempo;
 // let machine;
@@ -29,7 +29,7 @@
 
 //   getElapsedBeats() {
 //     let elapsed = (millis() - this.startTime) / 1000.0;
-//     return elapsed * (this.BPM / 60.0); // beats passed since start
+//     return elapsed * (this.BPM / 60.0); 
 //   }
 // }
 
@@ -42,7 +42,7 @@
 //   this.lowpass.freq(400);
 //   this.lowpass.res(1);
 
-//   // two color families for visual depth
+//   
 //   let colorset1 = [
 //     color(255, 220, 50),
 //     color(255, 170, 90),
@@ -56,7 +56,7 @@
 //     color(100, 255, 200)
 //   ];
 
-//   // two harmonic registers
+//   
 //   const E_BASS = [82.41, 103.83, 123.47, 155.56];
 //   const E_BASS_HIGH = [164.81, 207.65, 246.94, 311.13];
 
@@ -106,7 +106,7 @@
 //     this.phase = localBeats % 1.0;
 //     this.angle = this.phase * TWO_PI;
 
-//     // detect beat hit
+//    
 //     let currentBeat = floor(localBeats);
 //     if (currentBeat !== this.lastTriggerBeat) {
 //       this.lastTriggerBeat = currentBeat;
@@ -180,11 +180,10 @@
 //   }
 // }
 
-// 🥁 Mirror Polyrhythm Orchestra — Fractional Interlock (Option B)
 
-// 🥁 Mirror Polyrhythm Orchestra — Stable Twin Rhythm Version
 
-// 🥁 Perfect Twin Mirror Orchestra — Built from Group A Core
+
+
 
 let tempo;
 let leftMachine;
